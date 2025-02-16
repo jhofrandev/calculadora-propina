@@ -6,9 +6,12 @@ import OrderContents from "./components/OrderContents";
 import TipPercentageForm from "./components/TipPercentageForm";
 
 import { menuItems } from "./data/db";
+import { useReducer } from "react";
+import { initialState, orderReducer } from "./reducers/order-reducer";
 
 function App() {
   const { order, addItem, removeItem, tip, setTip, placeOrder } = useOrder();
+  const [state, dispatch] = useReducer(orderReducer, initialState);
 
   return (
     <>
