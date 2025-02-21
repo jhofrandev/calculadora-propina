@@ -1,5 +1,3 @@
-import useOrder from "./hooks/useOrder";
-
 import MenuItem from "./components/MenuItem";
 import OrderTotals from "./components/OrderTotals";
 import OrderContents from "./components/OrderContents";
@@ -10,7 +8,6 @@ import { useReducer } from "react";
 import { initialState, orderReducer } from "./reducers/order-reducer";
 
 function App() {
-  const { order, removeItem, tip, setTip, placeOrder } = useOrder();
   const [state, dispatch] = useReducer(orderReducer, initialState);
 
   return (
@@ -36,12 +33,12 @@ function App() {
             <>
               <OrderContents order={state.order} dispatch={dispatch} />
 
-              <TipPercentageForm setTip={setTip} tip={tip} />
+              <TipPercentageForm dispatch={dispatch} tip={state.tip} />
 
               <OrderTotals
                 order={state.order}
-                tip={tip}
-                placeOrder={placeOrder}
+                tip={state.tip}
+                dispatch={dispatch}
               />
             </>
           ) : (
